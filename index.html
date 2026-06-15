@@ -1,145 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rental Hub - Tenant & Landlord Management System</title>
-  <!-- Local Tabler icons fallback to avoid CDN MIME issues -->
-  <link rel="stylesheet" href="assets/tabler-icons.css">
-  <!-- Restored original stylesheet -->
-  <link rel="stylesheet" href="index.css">
-</head>
-<body>
+    <head>
+        <title>Portfolio</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Font Awesome for Contact Icons -->
+        <link rel="stylesheet" href="https://cloudflare.com">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header>
+            <!-- NEW: Profile Picture Container and Form Setup -->
+            <div class="profile-container">
+                <div class="profile-avatar" id="profileDisplay">
+                    <i class="fa-solid fa-user-astronaut placeholder-icon"></i>
+                </div>
+                <label for="imageUpload" class="upload-label">
+                    <i class="fa-solid fa-camera"></i> Change Photo
+                </label>
+                <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+            </div>
 
-  <!-- Navigation Component -->
-  <nav class="landing-nav">
-    <a href="#" class="logo-brand">
-      <i class="ti ti-building-estate" aria-hidden="true"></i> Rental Hub
-    </a>
-    <div class="nav-links">
-      <a href="#features" class="nav-link">Features</a>
-      <a href="#pricing" class="nav-link">Pricing</a>
-      <!-- FIX: Changed destination from index.html to prevent infinite loops -->
-      <a href="login.html" class="btn btn-outline">Go to Portal</a>
-    </div>
-  </nav>
+            <h1>Julius Ochieng</h1>
+            <p>Computer Science Student | Developer</p>
+        </header>
 
-  <!-- Hero Banner Block -->
-  <header class="hero-section">
-    <div class="hero-container">
-      <span class="badge-new">New: Version 2.0 Live</span>
-      <h1>Manage Properties, Tenants, and M-Pesa Payments in One Place</h1>
-      <div class="hero-scroll">
-        <p>Keep rent payments on time. Resolve maintenance fast. Organize tenant records. Grow your estate business.</p>
-      </div>
-      <p>The modern, lightweight rental management dashboard designed for landlords and estate managers looking to scale collections seamlessly.</p>
-      <div class="hero-ctas">
-        <!-- FIX: Updated target link address path to separate app files cleanly -->
-        <a href="login.html" class="btn btn-primary">Launch Dashboard</a>
-        <a href="#features" class="btn btn-secondary">See Features</a>
-      </div>
-    </div>
-  </header>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
 
-  <!-- Social Proof Section -->
-  <section class="trust-banner">
-    <div class="banner-content">
-      <i class="ti ti-shield-check" aria-hidden="true"></i> 
-      <span>Trusted by landlords managing over <strong>500+ residential units</strong> across Kenya.</span>
-    </div>
-  </section>
+        <section id="about">
+            <h2>About Me</h2>
+            <div class="card">
+                <p>I am a passionate computer science student with a keen interest in software development and technology. I enjoy creating innovative solutions to complex problems and am always eager to learn new skills.</p>
+            </div>
+        </section>
 
-  <!-- Features Grid Section -->
-  <section id="features" class="features-section">
-    <h2 class="section-title">Everything you need to automate your rentals</h2>
-    <p class="section-subtitle">Ditch the spreadsheets and manage your investments like a pro.</p>
-    
-    <div class="features-grid">
-      <!-- Feature 1 -->
-      <div class="feature-card">
-        <div class="icon-wrapper bg-blue">
-          <i class="ti ti-cash" aria-hidden="true"></i>
-        </div>
-        <h3>Instant Payment Logging</h3>
-        <p>Keep track of balances with optimized tools built to record automated cash, bank transfers, or manual M-Pesa reference receipts instantly.</p>
-      </div>
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <h3>Restaurant website</h3>
+                    <p>Designed and developed a responsive restaurant website using HTML, CSS, and JavaScript, featuring an interactive menu and online reservation system.</p>
+                    <!-- NEW: Project Link Actions -->
+                    <div class="project-links">
+                        <a href="#" class="proj-link demo-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+                        <a href="https://github.com" target="_blank" class="proj-link github-link"><i class="fa-brands fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>Rental hub</h3>
+                    <p>Currently developing a landlord management system whereby a landlord can manage their rental properties and tenants efficiently. Also the system will include a tenant page whereby tenants can view their status in the rental apartments. Tenants can also view their payment histories.</p>
+                    <!-- NEW: Project Link Actions -->
+                    <div class="project-links">
+                        <a href="https://github.com" target="_blank" class="proj-link github-link"><i class="fa-brands fa-github"></i> GitHub Code</a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      <!-- Feature 2 -->
-      <div class="feature-card">
-        <div class="icon-wrapper bg-green">
-          <i class="ti ti-users" aria-hidden="true"></i>
-        </div>
-        <h3>Tenant Portals</h3>
-        <p>Maintain digital profiles, view contact records, check active occupational statuses, and instantly audit overdue rent statements.</p>
-      </div>
+        <section id="contact">
+            <h2>Contact Me</h2>
+            <div class="card">
+                <!-- FIXED: Icons added directly inside the anchor tags -->
+                <div class="contact-buttons">
+                    <a href="mailto:ochieyjyulius@gmail.com" class="btn email-btn">
+                        <i class="fa-solid fa-envelope"></i> Email Me
+                    </a>
+                    <a href="https://wa.me" target="_blank" class="btn whatsapp-btn">
+                        <i class="fa-brands fa-whatsapp"></i> WhatsApp Chat
+                    </a>
+                    <a href="https://x.com" target="_blank" class="btn x-btn">
+                        <i class="fa-brands fa-x-twitter"></i> Follow on X
+                    </a>
+                </div>
+            </div>
+        </section>
 
-      <!-- Feature 3 -->
-      <div class="feature-card">
-        <div class="icon-wrapper bg-purple">
-          <i class="ti ti-chart-pie" aria-hidden="true"></i>
-        </div>
-        <h3>Real-time Analytics</h3>
-        <p>Monitor high-level metrics like exact regional occupancy rates, pending maintenance issue markers, and overall collected revenue amounts.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Interactive Pricing Tiers Section -->
-  <section id="pricing" class="pricing-section">
-    <h2 class="section-title">Simple, transparent pricing</h2>
-    <p class="section-subtitle">Choose the plan that fits your current property portfolio size.</p>
-    
-    <div class="pricing-grid">
-      <!-- Plan 1 -->
-      <div class="pricing-card">
-        <h3>Starter Plan</h3>
-        <div class="price">KSh 0<span>/ month</span></div>
-        <p class="plan-desc">Perfect for single landlords managing their first property investment.</p>
-        <ul class="plan-features">
-          <li><i class="ti ti-check"></i> Up to 5 Units</li>
-          <li><i class="ti ti-check"></i> Basic Tenant Logs</li>
-          <li><i class="ti ti-check"></i> M-Pesa Payment Tracking</li>
-        </ul>
-        <a href="login.html" class="btn btn-outline full-width">Get Started Free</a>
-      </div>
-
-      <!-- Plan 2 (Highlighted) -->
-      <div class="pricing-card premium">
-        <span class="popular-tag">Most Popular</span>
-        <h3>Growth Plan</h3>
-        <div class="price">KSh 2,500<span>/ month</span></div>
-        <p class="plan-desc">Built for commercial real estate or landlords with expanding portfolios.</p>
-        <ul class="plan-features">
-          <li><i class="ti ti-check"></i> Unlimited Units</li>
-          <li><i class="ti ti-check"></i> Advanced Financial Reports</li>
-          <li><i class="ti ti-check"></i> Multi-User Admin Access</li>
-          <li><i class="ti ti-check"></i> Premium Support Response</li>
-        </ul>
-        <button type="button" class="btn btn-primary full-width modal-trigger-btn">Upgrade Portfolio</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Dynamic Modal Popup Window Structure -->
-  <div class="modal-overlay" id="cta-modal" aria-hidden="true">
-    <div class="modal-box">
-      <button type="button" class="modal-close" id="close-modal-btn">&times;</button>
-      <h3>Ready to Scale Your Systems?</h3>
-      <p>Enter your email below. Our onboarding team will configure your custom database instance within 24 hours.</p>
-      <form id="lead-capture-form">
-        <input type="email" placeholder="Enter your business email address" required id="lead-email">
-        <button type="submit" class="btn btn-primary full-width">Request System Setup</button>
-      </form>
-      <p class="form-feedback hidden" id="form-success-msg">🚀 Thank you! We will reach out shortly.</p>
-    </div>
-  </div>
-
-  <!-- Global Footer -->
-  <footer>
-    <p>&copy; 2026 Rental Hub. All rights reserved. Built to optimize modern workflows.</p>
-  </footer>
-
-  <!-- Link to external functional javascript script asset -->
-  <script src="main.js"></script>
-</body>
+        <footer>
+            <p>&copy; 2026 Julius Ochieng. All rights reserved. Built with focus and Discipline.</p>
+        </footer>
+        <script src="script.js"></script>
+    </body>
 </html>
