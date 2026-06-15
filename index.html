@@ -1,87 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Portfolio</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Font Awesome for Contact Icons -->
-        <link rel="stylesheet" href="https://cloudflare.com">
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <header>
-            <!-- NEW: Profile Picture Container and Form Setup -->
-            <div class="profile-container">
-                <div class="profile-avatar" id="profileDisplay">
-                    <i class="fa-solid fa-user-astronaut placeholder-icon"></i>
-                </div>
-                <label for="imageUpload" class="upload-label">
-                    <i class="fa-solid fa-camera"></i> Change Photo
-                </label>
-                <input type="file" id="imageUpload" accept="image/*" style="display: none;">
-            </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Julius Ochieng | Personal Portfolio</title>
+  
+  <!-- Font Awesome CDNs for Professional Vector Graphics & Icon Buttons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <!-- Custom Modern CSS -->
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
 
-            <h1>Julius Ochieng</h1>
-            <p>Computer Science Student | Developer</p>
-        </header>
+  <!-- 1. Header Section with Avatar Display & Upload System -->
+  <header id="header-section">
+    <div class="avatar-wrapper">
+      <div id="profileDisplay" role="img" aria-label="Profile Avatar Display Container">
+        <!-- Default vector character astronaut icon placeholder -->
+        <i class="fa-solid fa-user-astronaut" id="avatar-icon"></i>
+      </div>
+      
+      <!-- Hidden file file element -->
+      <input type="file" id="imageUpload" accept="image/*" class="hidden-input" aria-label="Upload custom profile photo" />
+      
+      <!-- Styled visual trigger trigger for file upload helper -->
+      <label for="imageUpload" id="change-photo-label" class="upload-label">
+        <i class="fa-solid fa-camera"></i> Change Photo
+      </label>
+    </div>
+    
+    <!-- Student Header Titles -->
+    <h1>Julius Ochieng</h1>
+    <p class="subtitle">Computer Science Student &amp; Aspiring Software Engineer</p>
+  </header>
 
-        <nav>
-            <a href="#about">About</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
-        </nav>
+  <!-- 2. Interactive Sticky Navigation Bar -->
+  <nav id="nav-bar">
+    <a href="#about" class="nav-link" id="nav-about-link">About</a>
+    <a href="#skills" class="nav-link" id="nav-skills-link">Skills</a>
+    <a href="#projects" class="nav-link" id="nav-projects-link">Projects</a>
+    <a href="#contact" class="nav-link" id="nav-contact-link">Contact</a>
+  </nav>
 
-        <section id="about">
-            <h2>About Me</h2>
-            <div class="card">
-                <p>I am a passionate computer science student with a keen interest in software development and technology. I enjoy creating innovative solutions to complex problems and am always eager to learn new skills.</p>
-            </div>
-        </section>
+  <!-- Fluid Center Container Wrapper -->
+  <main class="app-container">
+    
+    <!-- 3. Semantic About Section -->
+    <section id="about">
+      <h2 class="section-title">About Me</h2>
+      <div class="card-wrapper" id="about-card">
+        <p>
+          I am a forward-looking Computer Science student seeking to push frontiers in computing. Passionate about engineering high-quality Web Applications and writing robust, highly optimized backend services, I merge deep theoretical frameworks with hands-on systems architecture. My research and developer exploration lean towards cloud deployments, scalable APIs, and performance-centric user interfaces. Outside of typing code, I am highly interested in interstellar space, automation, and expanding my skill sets across modern programming paradigms.
+        </p>
+      </div>
+    </section>
 
-        <section id="projects">
-            <h2>Projects</h2>
-            <div class="grid-container">
-                <div class="card">
-                    <h3>Restaurant website</h3>
-                    <p>Designed and developed a responsive restaurant website using HTML, CSS, and JavaScript, featuring an interactive menu and online reservation system.</p>
-                    <!-- NEW: Project Link Actions -->
-                    <div class="project-links">
-                        <a href="#" class="proj-link demo-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
-                        <a href="https://github.com" target="_blank" class="proj-link github-link"><i class="fa-brands fa-github"></i> GitHub</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <h3>Rental hub</h3>
-                    <p>Currently developing a landlord management system whereby a landlord can manage their rental properties and tenants efficiently. Also the system will include a tenant page whereby tenants can view their status in the rental apartments. Tenants can also view their payment histories.</p>
-                    <!-- NEW: Project Link Actions -->
-                    <div class="project-links">
-                        <a href="https://github.com" target="_blank" class="proj-link github-link"><i class="fa-brands fa-github"></i> GitHub Code</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- Skills Section -->
+    <section id="skills">
+      <h2 class="section-title">Technical Skills</h2>
+      <div class="card-wrapper" id="skills-card">
+        <div class="skills-grid">
+          <div class="skill-badge-card" id="skill-python">
+            <i class="fa-brands fa-python skill-icon"></i>
+            <span class="skill-name">Python</span>
+          </div>
+          <div class="skill-badge-card" id="skill-java">
+            <i class="fa-brands fa-java skill-icon"></i>
+            <span class="skill-name">Java</span>
+          </div>
+          <div class="skill-badge-card" id="skill-cloud">
+            <i class="fa-solid fa-cloud skill-icon"></i>
+            <span class="skill-name">Cloud Infrastructure</span>
+          </div>
+          <div class="skill-badge-card" id="skill-javascript">
+            <i class="fa-brands fa-js skill-icon"></i>
+            <span class="skill-name">JavaScript</span>
+          </div>
+          <div class="skill-badge-card" id="skill-react">
+            <i class="fa-brands fa-react skill-icon"></i>
+            <span class="skill-name">React</span>
+          </div>
+          <div class="skill-badge-card" id="skill-docker">
+            <i class="fa-brands fa-docker skill-icon"></i>
+            <span class="skill-name">Docker</span>
+          </div>
+          <div class="skill-badge-card" id="skill-database">
+            <i class="fa-solid fa-database skill-icon"></i>
+            <span class="skill-name">SQL Databases</span>
+          </div>
+          <div class="skill-badge-card" id="skill-git">
+            <i class="fa-brands fa-git-alt skill-icon"></i>
+            <span class="skill-name">Git Versioning</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <section id="contact">
-            <h2>Contact Me</h2>
-            <div class="card">
-                <!-- FIXED: Icons added directly inside the anchor tags -->
-                <div class="contact-buttons">
-                    <a href="mailto:ochieyjyulius@gmail.com" class="btn email-btn">
-                        <i class="fa-solid fa-envelope"></i> Email Me
-                    </a>
-                    <a href="https://wa.me" target="_blank" class="btn whatsapp-btn">
-                        <i class="fa-brands fa-whatsapp"></i> WhatsApp Chat
-                    </a>
-                    <a href="https://x.com" target="_blank" class="btn x-btn">
-                        <i class="fa-brands fa-x-twitter"></i> Follow on X
-                    </a>
-                </div>
-            </div>
-        </section>
+    <!-- 4. Projects Showcase Section -->
+    <section id="projects">
+      <h2 class="section-title font-medium">Featured Projects</h2>
+      
+      <div id="projects-grid">
+        <!-- Card 1: Restaurant website -->
+        <article class="project-card" id="project-card-restaurant">
+          <div>
+            <span class="project-tag">Frontend &amp; UX</span>
+            <h3 class="project-title">SavoryBites Restaurant Platform</h3>
+            <p class="project-desc">
+              An immersive customer experience web application built for boutique culinary brands. It provides clean category-based menu browsing, smooth stateful reservation booking calendars, and a live cart calculator facilitating interactive gourmet ordering and table booking schedules.
+            </p>
+          </div>
+          <div class="project-links">
+            <a href="https://savorybites.example.com" class="project-btn" id="live-demo-restaurant-btn">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo
+            </a>
+            <a href="https://github.com/julius-ochieng/restaurant-website" class="project-btn secondary" id="github-restaurant-btn">
+              <i class="fa-brands fa-github"></i> GitHub
+            </a>
+          </div>
+        </article>
 
-        <footer>
-            <p>&copy; 2026 Julius Ochieng. All rights reserved. Built with focus and Discipline.</p>
-        </footer>
-        <script src="script.js"></script>
-    </body>
+        <!-- Card 2: Rental hub -->
+        <article class="project-card" id="project-card-rental">
+          <div>
+            <span class="project-tag">Systems &amp; Database</span>
+            <h3 class="project-title">UrbanNest Rental Hub</h3>
+            <p class="project-desc">
+              A comprehensive residential property systems aggregator. Designed with strict user role partitioning, landlords can manage prospective tenant listings, schedule facility maintenance, view real-time occupancy graphs, and review historical leases, while tenants obtain customized access portals to search active homes, file immediate work order requests, and view billing logs.
+            </p>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/julius-ochieng/rental-hub" class="project-btn secondary" id="github-rental-btn">
+              <i class="fa-brands fa-github"></i> GitHub Code
+            </a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 5. Flexible Contact Card Wrapper -->
+    <section id="contact">
+      <h2 class="section-title">Connect with Me</h2>
+      
+      <div class="card-wrapper" id="contact-card">
+        <p>
+          I am currently actively looking for internship roles, student collaboration projects, or full-stack general junior positions. Please feel free to make contact!
+        </p>
+        
+        <!-- Interactive Action Button Row -->
+        <div id="contact-buttons">
+          <a href="mailto:juliuscsc6063924@kiambupoly.ac.ke" class="contact-btn email" id="email-contact-btn">
+            <i class="fa-solid fa-envelope"></i> Email Me
+          </a>
+          <a href="https://wa.me/254712345678" class="contact-btn whatsapp" id="whatsapp-contact-btn">
+            <i class="fa-brands fa-whatsapp"></i> WhatsApp Chat
+          </a>
+          <a href="https://x.com/juliusochieng" class="contact-btn x-twitter" id="x-contact-btn">
+            <i class="fa-brands fa-x-twitter"></i> Follow on X
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 6. Footer Layout -->
+  <footer>
+    <div class="app-container">
+      <p>&copy; 2026 Julius Ochieng. All rights reserved.</p>
+      <div class="branding" id="footer-branding-tag">Julius Ochieng &bull; Portfolio</div>
+    </div>
+  </footer>
+
+  <!-- Vanilla Client-Side JavaScript -->
+  <script type="module" src="./script.js"></script>
+</body>
 </html>

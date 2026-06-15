@@ -1,158 +1,588 @@
-/* ==========================================================================
-   1. RESET & GLOBAL STYLES
-   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Outfit', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Clean Minimalism Theme Palette */
+  --bg-primary: #F9FAFB;          /* Gray 50 */
+  --bg-card: #FFFFFF;             /* Pure White */
+  --bg-header: #FFFFFF;
+  --text-main: #111827;           /* Gray 900 */
+  --text-muted: #4B5563;          /* Gray 600 */
+  --text-light: #9CA3AF;          /* Gray 400 */
+  --color-primary: #2563EB;       /* Blue 600 */
+  --color-primary-hover: #1D4ED8;  /* Blue 700 */
+  --color-border: #E5E7EB;        /* Gray 200 */
+  --color-border-hover: #D1D5DB;  /* Gray 300 */
+  --color-accent-bg: #EFF6FF;     /* Blue 50 */
+  --color-accent-text: #172554;   /* Blue 950 */
+  
+  /* Brand colors */
+  --color-whatsapp: #25D366;
+  --color-whatsapp-hover: #1CBD55;
+  --color-x-twitter: #0F1419;
+  --color-x-twitter-hover: #24292E;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-card-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 12px;             /* 12px as per Clean Minimalism specifications */
+  --radius-xl: 18px;
+  --radius-full: 9999px;
+  
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease-out;
+}
+
+/* Base Reset style */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
-    scroll-behavior: smooth;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Adjust for sticky nav bar */
 }
 
 body {
-    background-color: #ffffff; /* Solid white background */
-    color: #1e293b; /* Deep slate dark text for high contrast */
-    line-height: 1.6;
-    padding-bottom: 60px;
+  font-family: var(--font-sans);
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* ==========================================================================
-   2. HEADER & NAVIGATION
-   ========================================================================== */
-header {
-    text-align: center;
-    padding: 5rem 1rem 3rem 1rem;
-    background-color: #f8fafc; /* Ultra-light gray for subtle contrast */
-    border-bottom: 1px solid #e2e8f0;
+/* Page Layout Wrapper */
+.app-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
 }
 
-header h1 {
-    font-size: 3rem;
-    color: #0284c7; /* Professional blue accent */
-    margin-bottom: 0.5rem;
-    letter-spacing: -1px;
+/* 1. Header Styles */
+#header-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 5rem 1.5rem 3.5rem 1.5rem;
+  background-color: var(--bg-header);
+  border-bottom: 1px solid var(--color-border);
+  position: relative;
+  overflow: hidden;
 }
 
-header p {
-    font-size: 1.2rem;
-    color: #64748b; /* Soft slate gray for subtitle */
-    font-weight: 400;
+/* Fine structural grid decoration for background */
+#header-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(var(--color-border) 1px, transparent 1px),
+                    linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: center;
+  opacity: 0.25;
+  pointer-events: none;
 }
 
-nav {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    background-color: #ffffff;
-    padding: 1rem;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    border-bottom: 1px solid #e2e8f0;
+/* Profile Photo System */
+.avatar-wrapper {
+  position: relative;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
 }
 
-nav a {
-    color: #475569;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.2s ease;
+#profileDisplay {
+  width: 110px;
+  height: 110px;
+  border-radius: var(--radius-full);
+  background-color: #F3F4F6;
+  border: 2px dashed #D1D5DB;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all var(--transition-normal);
 }
 
-nav a:hover {
-    color: #0284c7; /* Highlight on hover */
+#profileDisplay:hover {
+  border-color: var(--color-primary);
+  border-style: solid;
 }
 
-/* ==========================================================================
-   3. SECTIONS & LAYOUT
-   ========================================================================== */
+#profileDisplay #avatar-icon {
+  font-size: 3rem;
+  color: var(--text-light);
+  transition: transform var(--transition-normal);
+}
+
+#profileDisplay:hover #avatar-icon {
+  transform: scale(1.05);
+}
+
+/* Custom upload button */
+.upload-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+}
+
+.upload-label:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background-color: var(--color-accent-bg);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+/* Hidden elements */
+.hidden-input {
+  display: none !important;
+  opacity: 0;
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+/* Title & Subtitle */
+#header-section h1 {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+  z-index: 10;
+}
+
+#header-section .subtitle {
+  font-size: 1.15rem;
+  color: var(--color-primary);
+  font-weight: 500;
+  max-width: 500px;
+  z-index: 10;
+}
+
+/* 2. Sticky Navigation */
+#nav-bar {
+  position: sticky;
+  top: 0;
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  padding: 1rem;
+  z-index: 100;
+  transition: border-color var(--transition-normal);
+}
+
+#nav-bar.shadow-scrolled {
+  box-shadow: var(--shadow-sm);
+  border-color: rgba(226, 232, 240, 0.8);
+}
+
+.nav-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.25rem 0.5rem;
+  position: relative;
+  transition: color var(--transition-fast);
+}
+
+.nav-link:hover {
+  color: var(--text-main);
+}
+
+/* Elegant expanding underline for active state */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-primary);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--transition-normal);
+}
+
+.nav-link.active {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.nav-link.active::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Content Layout Sections */
 section {
-    max-width: 800px;
-    margin: 4rem auto;
-    padding: 0 1.5rem;
+  padding: 5rem 0;
+  border-bottom: 1px solid var(--color-border);
 }
 
-section h2 {
-    font-size: 2rem;
-    color: #0f172a;
-    margin-bottom: 1.5rem;
-    border-bottom: 2px solid #e2e8f0;
-    padding-bottom: 0.5rem;
+section:last-of-type {
+  border-bottom: none;
 }
 
-/* Container for project cards styling */
-#projects {
-    display: flex;
-    flex-direction: column;
+.section-title {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 2rem;
+  position: relative;
+  display: inline-block;
 }
 
-/* ==========================================================================
-   4. CARD DESIGN (Minimalist Outline / Soft Shadow)
-   ========================================================================== */
-.card {
-    background-color: #ffffff;
-    border: 1px solid #e2e8f0; /* Soft gray border line */
-    border-radius: 12px;
-    padding: 2rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); /* Very subtle shadow */
-    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+/* Card wrappers */
+.card-wrapper {
+  background-color: var(--bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-normal), border-color var(--transition-normal);
 }
 
-.card:hover {
-    transform: translateY(-2px);
-    border-color: #0284c7; /* Blue outline highlight on hover */
-    box-shadow: 0 10px 15px -3px rgba(2, 132, 199, 0.1); /* Soft blue shadow glow */
+.card-wrapper:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-border-hover);
 }
 
-.card h3 {
-    color: #0284c7;
-    margin-bottom: 0.75rem;
-    font-size: 1.4rem;
+/* 3. About Section */
+#about-section p {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.75;
 }
 
-.card p {
-    color: #475569;
+/* Skills Section Grid */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.25rem;
 }
 
-/* ==========================================================================
-   5. CONTACT & FOOTER
-   ========================================================================== */
-#contact .card p {
-    margin-bottom: 0.5rem;
-    font-family: inherit;
-    font-size: 1rem;
-    color: #334155;
+.skill-badge-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  transition: all var(--transition-fast);
 }
 
-#contact .card p:last-child {
-    margin-bottom: 0;
+.skill-badge-card:hover {
+  border-color: var(--color-primary);
+  background-color: var(--bg-card);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
 
+.skill-icon {
+  font-size: 1.5rem;
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+}
+
+.skill-name {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+/* 4. Projects Section Grid */
+#projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.project-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-lg);
+}
+
+.project-tag {
+  display: inline-block;
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  background-color: var(--color-accent-bg);
+  color: var(--color-accent-text);
+  border-radius: var(--radius-sm);
+  margin-bottom: 1.25rem;
+}
+
+.project-title {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 0.75rem;
+}
+
+.project-desc {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 1.75rem;
+  line-height: 1.6;
+}
+
+/* Button groups inside project cards */
+.project-links {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.project-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  width: 100%;
+}
+
+.project-btn i {
+  font-size: 0.95rem;
+}
+
+/* Primary style for project button */
+.project-btn:not(.secondary) {
+  background-color: var(--color-primary);
+  color: white !important;
+  border: 1px solid var(--color-primary);
+}
+
+.project-btn:not(.secondary):hover {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+  box-shadow: var(--shadow-md);
+}
+
+/* Secondary style for project button */
+.project-btn.secondary {
+  background-color: var(--bg-card);
+  color: var(--text-muted) !important;
+  border: 1px solid var(--color-border);
+}
+
+.project-btn.secondary:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary) !important;
+  background-color: var(--color-accent-bg);
+}
+
+/* 5. Contact Section */
+#contact-card {
+  text-align: center;
+}
+
+#contact-card p {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  max-width: 600px;
+  margin: 0 auto 2.5rem auto;
+  line-height: 1.7;
+}
+
+#contact-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.contact-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0.85rem 1.75rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: var(--radius-full);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+}
+
+.contact-btn i {
+  font-size: 1.1rem;
+}
+
+/* Email Button Styling */
+.contact-btn.email {
+  background-color: var(--color-primary);
+  color: white !important;
+  border: 1px solid var(--color-primary);
+}
+
+.contact-btn.email:hover {
+  background-color: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+/* WhatsApp Button Styling */
+.contact-btn.whatsapp {
+  background-color: var(--color-whatsapp);
+  color: white !important;
+  border: 1px solid var(--color-whatsapp);
+}
+
+.contact-btn.whatsapp:hover {
+  background-color: var(--color-whatsapp-hover);
+  border-color: var(--color-whatsapp-hover);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+/* X / Twitter Button Styling */
+.contact-btn.x-twitter {
+  background-color: var(--color-x-twitter);
+  color: white !important;
+  border: 1px solid var(--color-x-twitter);
+}
+
+.contact-btn.x-twitter:hover {
+  background-color: var(--color-x-twitter-hover);
+  border-color: var(--color-x-twitter-hover);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+/* 6. Footer Styles */
 footer {
-    text-align: center;
-    padding: 2rem;
-    color: #94a3b8;
-    font-size: 0.9rem;
-    border-top: 1px solid #e2e8f0;
-    background-color: #f8fafc;
+  text-align: center;
+  padding: 3rem 1.5rem;
+  background-color: var(--bg-card);
+  border-top: 1px solid var(--color-border);
+  color: var(--text-light);
+  font-size: 0.9rem;
 }
 
-/* ==========================================================================
-   6. RESPONSIVE DESIGN (Mobile Friendly)
-   ========================================================================== */
-@media (max-width: 600px) {
-    header h1 {
-        font-size: 2.2rem;
-    }
-    
-    nav {
-        gap: 1.2rem;
-    }
-    
-    section {
-        margin: 2.5rem auto;
-    }
+footer .branding {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--text-main);
+  margin-top: 0.35rem;
+  font-size: 0.95rem;
+}
+
+/* Fully Responsive Breakpoints */
+@media (max-width: 768px) {
+  #header-section {
+    padding: 3.5rem 1rem 2.5rem 1rem;
+  }
+  
+  #header-section h1 {
+    font-size: 2.25rem;
+  }
+  
+  #header-section .subtitle {
+    font-size: 1rem;
+  }
+  
+  #nav-bar {
+    gap: 1.5rem;
+    padding: 0.85rem;
+  }
+  
+  .nav-link {
+    font-size: 0.9rem;
+  }
+  
+  section {
+    padding: 3.5rem 0;
+  }
+  
+  .card-wrapper {
+    padding: 1.75rem;
+  }
+  
+  #projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  
+  .project-card {
+    padding: 1.5rem;
+  }
+  
+  #contact-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .contact-btn {
+    width: 100%;
+  }
 }
