@@ -18,6 +18,7 @@
   --color-border-hover: #D1D5DB;  /* Gray 300 */
   --color-accent-bg: #EFF6FF;     /* Blue 50 */
   --color-accent-text: #172554;   /* Blue 950 */
+  --bg-nav: rgba(255, 255, 255, 0.85);
   
   /* Brand colors */
   --color-whatsapp: #25D366;
@@ -38,6 +39,27 @@
   
   --transition-fast: 0.15s ease;
   --transition-normal: 0.25s ease-out;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #111827;          /* Gray 900 */
+  --bg-card: #1F2937;             /* Gray 800 */
+  --bg-header: #1F2937;           /* Gray 800 */
+  --text-main: #F9FAFB;           /* Gray 50 */
+  --text-muted: #D1D5DB;          /* Gray 300 */
+  --text-light: #6B7280;          /* Gray 500 */
+  --color-primary: #3B82F6;       /* Blue 500 */
+  --color-primary-hover: #60A5FA;  /* Blue 400 */
+  --color-border: #374151;        /* Gray 700 */
+  --color-border-hover: #4B5563;  /* Gray 600 */
+  --color-accent-bg: #1E3A8A;     /* Blue 900 */
+  --color-accent-text: #BFDBFE;   /* Blue 200 */
+  --bg-nav: rgba(31, 41, 55, 0.85); /* Gray 800 transparent */
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.4);
+  --shadow-card-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
 }
 
 /* Base Reset style */
@@ -110,8 +132,8 @@ body {
   width: 110px;
   height: 110px;
   border-radius: var(--radius-full);
-  background-color: #F3F4F6;
-  border: 2px dashed #D1D5DB;
+  background-color: var(--color-border);
+  border: 2px dashed var(--text-light);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -196,15 +218,41 @@ body {
 #nav-bar {
   position: sticky;
   top: 0;
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: var(--bg-nav);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--color-border);
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 2.5rem;
-  padding: 1rem;
+  padding: 1rem 2.5rem;
   z-index: 100;
-  transition: border-color var(--transition-normal);
+  transition: border-color var(--transition-normal), background-color var(--transition-normal);
+}
+
+/* Theme Toggle Button styling */
+.theme-toggle-btn {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 1rem;
+  transition: all var(--transition-fast);
+  position: absolute;
+  right: 2.5rem;
+}
+
+.theme-toggle-btn:hover {
+  background-color: var(--color-accent-bg);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  transform: scale(1.05);
 }
 
 #nav-bar.shadow-scrolled {
@@ -348,13 +396,16 @@ section:last-of-type {
   flex-direction: column;
   justify-content: space-between;
   box-shadow: var(--shadow-sm);
-  transition: all var(--transition-normal);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow;
 }
 
 .project-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px);
   border-color: var(--color-primary);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-card-hover);
 }
 
 .project-tag {
@@ -552,11 +603,18 @@ footer .branding {
   }
   
   #nav-bar {
-    gap: 1.5rem;
-    padding: 0.85rem;
+    gap: 1.25rem;
+    padding: 0.85rem 3.5rem 0.85rem 1.25rem;
   }
   
   .nav-link {
+    font-size: 0.9rem;
+  }
+
+  .theme-toggle-btn {
+    right: 1.25rem;
+    width: 32px;
+    height: 32px;
     font-size: 0.9rem;
   }
   
@@ -586,3 +644,18 @@ footer .branding {
     width: 100%;
   }
 }
+
+/* Scroll-triggered elegant slide up & fade-in animations */
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.scroll-animate.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+

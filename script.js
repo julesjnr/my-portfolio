@@ -77,33 +77,104 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  // --- IntersectionObserver for Nav Link Scroll-Highlighting ---
+  // --- Scroll-Based Highlight for Navigation Links ---
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-link');
 
-  const observerOptions = {
-    root: null, // viewport
-    rootMargin: '-30% 0px -60% 0px', // check when element occupies middle third of viewport
-    threshold: 0
-  };
+  function highlightNavOnScroll() {
+    let currentSectionId = '';
+    // Use an offset buffer matching the sticky header height
+    const scrollPosition = window.scrollY + 120;
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.getAttribute('id');
-        
-        navLinks.forEach(link => {
-          if (link.getAttribute('href') === `#${id}`) {
-            link.classList.add('active');
-          } else {
-            link.classList.remove('active');
-          }
-        });
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
+      if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+        currentSectionId = section.getAttribute('id');
       }
     });
-  }, observerOptions);
 
-  sections.forEach(section => observer.observe(section));
+    // Handle bottom of page edge case: activate the final section (contact)
+    if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 30) {
+      if (sections.length > 0) {
+        currentSectionId = sections[sections.length - 1].getAttribute('id');
+      }
+    }
+
+    navLinks.forEach(link => {
+      if (link.getAttribute('href') === `#${currentSectionId}`) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  }
+
+  // Bind to scroll events and call immediately on load
+  window.addEventListener('scroll', highlightNavOnScroll);
+  highlightNavOnScroll();
+
+
+  // --- Persistent Light / Dark Mode Toggle ---
+  const themeToggleBtn = document.getElementById('theme-toggle');
+  const themeToggleIcon = themeToggleBtn ? themeToggleBtn.querySelector('i') : null;
+
+  // Retrieve existing selection or match system preference defaults
+  const storedTheme = localStorage.getItem('julius_portfolio_theme');
+  const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const initialTheme = storedTheme || (userPrefersDark ? 'dark' : 'light');
+
+  applyTheme(initialTheme);
+
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      applyTheme(newTheme);
+      // Persist set preferences
+      localStorage.setItem('julius_portfolio_theme', newTheme);
+    });
+  }
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    if (themeToggleIcon) {
+      if (theme === 'dark') {
+        themeToggleIcon.className = 'fa-solid fa-sun';
+      } else {
+        themeToggleIcon.className = 'fa-solid fa-moon';
+      }
+    }
+  }
+
+
+  // --- Scroll-Triggered Fade-In Animations (Intersection Observer) ---
+  const animatedElements = document.querySelectorAll('.card-wrapper, .project-card, .skills-grid > *');
+  
+  // Progressively add the scroll-animate class to target elements to keep layout clean if standard JS fails
+  animatedElements.forEach(el => {
+    el.classList.add('scroll-animate');
+  });
+
+  const animObserverOptions = {
+    root: null, // viewport
+    threshold: 0.1, // trigger when 10% of the element is visible
+    rootMargin: '0px 0px -40px 0px' // slightly buffer before it enters the screen
+  };
+
+  const animObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        // Unobserve to trigger the animation transition exactly once per load
+        observer.unobserve(entry.target);
+      }
+    });
+  }, animObserverOptions);
+
+  animatedElements.forEach(el => {
+    animObserver.observe(el);
+  });
 
 
   // --- Defensive Target Link Quality Assurance (External Opens) ---
