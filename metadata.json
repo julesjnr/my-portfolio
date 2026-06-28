@@ -1,0 +1,6 @@
+{
+  "name": "Julius Ochieng Portfolio",
+  "description": "A clean, minimalist developer portfolio website for Julius Ochieng.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
